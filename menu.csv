@@ -1,0 +1,11 @@
+id,name,category,price,original_price,badge,description,image_url,is_popular
+1,Combo Gà Rán Giòn Tươi,Combo,150000,109000,HOT,2 miếng gà giòn cay + 1 khoai tây chiên vừa + 1 Pepsi mát lạnh sảng khoái,image/products/ga-ran.svg,TRUE
+2,Gà Rán Sốt Cay Hàn Quốc,GaRan,45000,52000,BEST SELLER,1 miếng gà rán giòn rụm phủ xốt cay ngọt chuẩn vị kèm mè trắng rang thơm,image/products/ga-sot-cay.svg,TRUE
+3,Burger Tôm Crispy Giòn Cay,Burger,55000,65000,MỚI,Burger nhân tôm tươi giòn rụm kèm xốt mayonnaise béo ngậy và xà lách tươi xanh,image/products/burger.svg,FALSE
+4,Combo Nhóm Party Tưng Bừng,Combo,199000,249000,TIẾT KIỆM 50K,5 miếng gà giòn cay + 1 khoai tây vừa + 2 lon Pepsi mát lạnh cho nhóm bạn,image/products/combo-party.svg,TRUE
+5,Khoai Tây Chiên Lớn (Jumbo),AnKem,35000,40000,,Khoai tây sợi vàng ươm giòn rụm rắc muối tiêu đậm đà kích thước lớn,image/products/khoai-tay-chien.jpg,FALSE
+6,Kem Sundae Dâu Tây Ngọt Mát,TrangMieng,19000,25000,,Kem tươi vani sánh mịn phủ sốt mứt dâu tây đỏ mọng thanh mát ngọt dịu,image/products/kem-sundae.svg,FALSE
+7,Pepsi Tươi Mát Lạnh Cỡ Lớn,DoUong,20000,22000,,Nước ngọt có gas Pepsi ướp lạnh sảng khoái đập tan mọi cơn khát,image/products/pepsi.svg,FALSE
+8,Gà Giòn Cay 2 Miếng Đậm Vị,GaRan,79000,89000,FAVORITE,2 miếng gà rán công thức bí truyền 11 loại thảo mộc da giòn thịt mọng nước,image/products/ga-ran.svg,TRUE
+9,Burger Gà Giòn Tiêu Đen,Burger,59000,69000,HOT DEAL,Burger phi-lê gà rán sốt tiêu đen cay nồng đậm đà bùng nổ vị giác,image/products/burger.svg,TRUE
+10,Combo Gà Rán & Burger Đôi,Combo,129000,159000,GIẢM 30K,1 Burger gà giòn + 1 miếng gà rán giòn cay + 1 khoai chiên + 1 Pepsi,image/products/combo-party.svg,TRUE

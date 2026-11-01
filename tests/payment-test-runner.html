@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KFC Vietnam - Test Runner & Demo Module Thanh Toán</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    code, pre { font-family: 'JetBrains Mono', monospace; }
+  </style>
+</head>
+<body class="bg-gray-100 text-gray-800 p-4 sm:p-8">
+
+  <div class="max-w-5xl mx-auto space-y-6">
+    
+    <!-- Header -->
+    <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <div class="w-12 h-12 rounded-xl bg-red-600 text-white font-black flex items-center justify-center text-xl shadow">
+          KFC
+        </div>
+        <div>
+          <h1 class="text-xl font-black text-gray-900 uppercase">Module 2: Thanh Toán (Payment Module)</h1>
+          <p class="text-xs text-gray-500">Trình kiểm thử tự động (Unit Test Runner) & Bộ giả lập thanh toán</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-3">
+        <button onclick="runBrowserTests()" class="px-5 py-2.5 bg-red-600 hover:bg-red-700 text-white text-xs font-bold rounded-xl transition shadow flex items-center gap-2">
+          <span>▶ Chạy lại Test Cases</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Summary Stats Bar -->
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+      <div class="bg-white p-4 rounded-xl border border-gray-200">
+        <span class="text-xs font-semibold text-gray-400 block">Tổng số Test</span>
+        <span id="stat-total" class="text-2xl font-black text-gray-800">0</span>
+      </div>
+      <div class="bg-white p-4 rounded-xl border border-emerald-200 bg-emerald-50/30">
+        <span class="text-xs font-semibold text-emerald-600 block">Vượt qua (Passed)</span>
+        <span id="stat-passed" class="text-2xl font-black text-emerald-600">0</span>
+      </div>
+      <div class="bg-white p-4 rounded-xl border border-rose-200 bg-rose-50/30">
+        <span class="text-xs font-semibold text-rose-600 block">Thất bại (Failed)</span>
+        <span id="stat-failed" class="text-2xl font-black text-rose-600">0</span>
+      </div>
+      <div class="bg-white p-4 rounded-xl border border-blue-200 bg-blue-50/30">
+        <span class="text-xs font-semibold text-blue-600 block">Tỷ lệ thành công</span>
+        <span id="stat-rate" class="text-2xl font-black text-blue-600">0%</span>
+      </div>
+    </div>
+
+    <!-- Test Results Log List -->
+    <div class="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
+      <div class="px-6 py-4 border-b border-gray-100 flex items-center justify-between bg-gray-50">
+        <h2 class="font-bold text-sm text-gray-800">Chi tiết kết quả kiểm thử (Test Execution Log)</h2>
+        <span id="test-status-pill" class="text-xs px-2.5 py-1 rounded-full font-bold bg-amber-100 text-amber-800">Đang chuẩn bị...</span>
+      </div>
+      <div id="test-results-container" class="divide-y divide-gray-100 text-xs p-2 max-h-[500px] overflow-y-auto">
+        <!-- Injected via JavaScript -->
+      </div>
+    </div>
+
+    <!-- Live Interactive Checkout Simulator -->
+    <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-200 space-y-6">
+      <div class="border-b border-gray-100 pb-3 flex items-center justify-between">
+        <div>
+          <h2 class="text-base font-bold text-gray-900">Giả lập thanh toán trực tiếp (Interactive Simulator)</h2>
+          <p class="text-xs text-gray-500">Thử nghiệm luồng nhận dữ liệu từ Giỏ Hàng -> Tính toán -> Chọn cổng -> Biên lai</p>
+        </div>
+        <span class="text-xs bg-red-100 text-red-700 font-bold px-2.5 py-1 rounded-full">Live Demo</span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
+        
+        <!-- Input Form -->
+        <div class="space-y-3">
+          <h3 class="font-bold text-gray-700 uppercase tracking-wider text-[11px]">1. Dữ liệu đầu vào đơn hàng:</h3>
+          
+          <div>
+            <label class="block font-semibold mb-1 text-gray-600">Họ tên người nhận:</label>
+            <input type="text" id="sim-name" value="Nguyễn Văn An" class="w-full px-3 py-2 border rounded-lg bg-gray-50 font-medium">
+          </div>
+
+          <div>
+            <label class="block font-semibold mb-1 text-gray-600">Số điện thoại (Việt Nam):</label>
+            <input type="text" id="sim-phone" value="0912345678" class="w-full px-3 py-2 border rounded-lg bg-gray-50 font-medium font-mono">
+          </div>
+
+          <div>
+            <label class="block font-semibold mb-1 text-gray-600">Địa chỉ giao hàng:</label>
+            <input type="text" id="sim-address" value="330 Nguyễn Thị Minh Khai, Phường 5, Quận 3" class="w-full px-3 py-2 border rounded-lg bg-gray-50 font-medium">
+          </div>
+
+          <div class="grid grid-cols-2 gap-2">
+            <div>
+              <label class="block font-semibold mb-1 text-gray-600">Mã Voucher:</label>
+              <select id="sim-voucher" onchange="runSimulationCalculation()" class="w-full px-3 py-2 border rounded-lg bg-gray-50 font-semibold font-mono">
+                <option value="">Không dùng mã</option>
+                <option value="KFCGIOL" selected>KFCGIOL (Giảm 20% max 40k)</option>
+                <option value="FREESHIP">FREESHIP (Freeship 0đ)</option>
+                <option value="PARTY50">PARTY50 (Giảm 50k)</option>
+              </select>
+            </div>
+            <div>
+              <label class="block font-semibold mb-1 text-gray-600">Hình thức giao:</label>
+              <select id="sim-delivery" onchange="runSimulationCalculation()" class="w-full px-3 py-2 border rounded-lg bg-gray-50 font-semibold">
+                <option value="STANDARD">Tiêu chuẩn (30 phút)</option>
+                <option value="EXPRESS">Hỏa tốc (+15k, 20 phút)</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label class="block font-semibold mb-1 text-gray-600">Phương thức thanh toán:</label>
+            <select id="sim-method" class="w-full px-3 py-2 border rounded-lg bg-gray-50 font-bold text-red-700">
+              <option value="COD">💵 Tiền mặt khi nhận hàng (COD)</option>
+              <option value="MOMO">👛 Ví điện tử MoMo (MoMo-QR)</option>
+              <option value="VNPAY">🏦 VNPAY-QR / VietQR</option>
+              <option value="CARD">💳 Thẻ Quốc tế (Visa / 3D-Secure)</option>
+            </select>
+          </div>
+
+          <button onclick="executeSimulatedCheckout()" class="w-full py-2.5 bg-red-600 hover:bg-red-700 text-white font-bold rounded-xl shadow transition">
+            Xác nhận thanh toán & Tạo biên lai
+          </button>
+        </div>
+
+        <!-- Order Summary & Receipt Output -->
+        <div class="space-y-3">
+          <h3 class="font-bold text-gray-700 uppercase tracking-wider text-[11px]">2. Kết quả tính toán & Biên lai điện tử:</h3>
+          
+          <div id="sim-calc-breakdown" class="p-3 bg-gray-50 rounded-xl border space-y-1.5 font-medium">
+            <!-- Dynamic calculation breakdown -->
+          </div>
+
+          <div id="sim-receipt-box" class="p-4 bg-stone-900 text-stone-200 rounded-xl font-mono text-[11px] overflow-x-auto max-h-60">
+            // Bấm "Xác nhận thanh toán" để xem cấu trúc Receipt JSON trả về...
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Nạp Module Thanh Toán -->
+  <script src="../js/payment.js"></script>
+
+  <script>
+    // Test execution state
+    let testCount = 0;
+    let passedCount = 0;
+    let failedCount = 0;
+
+    function addTestResult(suite, name, isPass, errorMsg = '') {
+      testCount++;
+      if (isPass) passedCount++;
+      else failedCount++;
+
+      const container = document.getElementById('test-results-container');
+      const row = document.createElement('div');
+      row.className = `p-3 flex items-start justify-between gap-4 ${isPass ? 'hover:bg-emerald-50/40' : 'bg-red-50/60'}`;
+      
+      row.innerHTML = `
+        <div class="space-y-0.5">
+          <div class="flex items-center gap-2">
+            <span class="font-bold ${isPass ? 'text-gray-800' : 'text-red-700'}">${name}</span>
+            <span class="text-[10px] text-gray-400 font-mono">[${suite}]</span>
+          </div>
+          ${errorMsg ? `<p class="text-red-600 font-mono mt-1 pl-2 border-l-2 border-red-500">${errorMsg}</p>` : ''}
+        </div>
+        <span class="px-2 py-0.5 rounded font-black text-[10px] tracking-wider uppercase ${isPass ? 'bg-emerald-100 text-emerald-800' : 'bg-rose-100 text-rose-800'}">
+          ${isPass ? 'PASSED' : 'FAILED'}
+        </span>
+      `;
+      container.appendChild(row);
+      updateStats();
+    }
+
+    function updateStats() {
+      document.getElementById('stat-total').textContent = testCount;
+      document.getElementById('stat-passed').textContent = passedCount;
+      document.getElementById('stat-failed').textContent = failedCount;
+      const rate = testCount > 0 ? Math.round((passedCount / testCount) * 100) : 0;
+      document.getElementById('stat-rate').textContent = `${rate}%`;
+
+      const pill = document.getElementById('test-status-pill');
+      if (failedCount === 0 && testCount > 0) {
+        pill.className = "text-xs px-2.5 py-1 rounded-full font-bold bg-emerald-100 text-emerald-800";
+        pill.textContent = `Tất cả ${testCount} tests thành công 100%`;
+      } else {
+        pill.className = "text-xs px-2.5 py-1 rounded-full font-bold bg-rose-100 text-rose-800";
+        pill.textContent = `${failedCount} tests thất bại`;
+      }
+    }
+
+    function runBrowserTests() {
+      testCount = 0;
+      passedCount = 0;
+      failedCount = 0;
+      document.getElementById('test-results-container').innerHTML = '';
+
+      const P = window.KFCPaymentModule;
+      if (!P) {
+        alert('Không tìm thấy window.KFCPaymentModule!');
+        return;
+      }
+
+      // Group 1: Validation
+      try {
+        const r1 = P.validateRecipientName('Nguyễn Văn An');
+        addTestResult('Validation', '1.1. validateRecipientName: Nhận tên tiếng Việt có dấu chuẩn', r1.isValid === true);
+      } catch(e) { addTestResult('Validation', '1.1. Tên tiếng Việt', false, e.message); }
+
+      try {
+        const r2 = P.validateRecipientName('<script>');
+        addTestResult('Validation', '1.2. validateRecipientName: Chặn script XSS trong họ tên', r2.isValid === false);
+      } catch(e) { addTestResult('Validation', '1.2. Chặn XSS', false, e.message); }
+
+      try {
+        const r3 = P.validateVietnamesePhone('0912345678');
+        addTestResult('Validation', '1.3. validateVietnamesePhone: Chấp nhận số điện thoại di động 10 số', r3.isValid === true);
+      } catch(e) { addTestResult('Validation', '1.3. Phone hợp lệ', false, e.message); }
+
+      try {
+        const r4 = P.validateVietnamesePhone('0123456789');
+        addTestResult('Validation', '1.4. validateVietnamesePhone: Từ chối đầu số 01 cũ không còn dùng', r4.isValid === false);
+      } catch(e) { addTestResult('Validation', '1.4. Phone cũ', false, e.message); }
+
+      try {
+        const r5 = P.validateDeliveryAddress('330 Nguyen Thi Minh Khai, Q3');
+        addTestResult('Validation', '1.5. validateDeliveryAddress: Chấp nhận địa chỉ hợp lệ', r5.isValid === true);
+      } catch(e) { addTestResult('Validation', '1.5. Địa chỉ', false, e.message); }
+
+      try {
+        const r6 = P.validateLuhn('4111111111111111');
+        addTestResult('Validation', '1.6. validateLuhn: Kiểm tra thuật toán Mod 10 số thẻ Visa', r6 === true);
+      } catch(e) { addTestResult('Validation', '1.6. Luhn', false, e.message); }
+
+      // Group 2: Pricing Engine
+      const items = [
+        { id: '1', name: 'Combo Gà Rán', price: 89000, quantity: 1 },
+        { id: '5', name: 'Khoai Tây Lớn', price: 35000, quantity: 1 }
+      ]; // 124k
+
+      try {
+        const t1 = P.calculateTotals({ items: items });
+        addTestResult('Pricing', '2.1. Đơn < 150k tính phí ship tiêu chuẩn 20.000₫', t1.shippingFee === 20000 && t1.grandTotal === 144000);
+      } catch(e) { addTestResult('Pricing', '2.1. Phí ship chuẩn', false, e.message); }
+
+      try {
+        const t2 = P.calculateTotals({ items: [{ id: '4', price: 199000, quantity: 1 }] });
+        addTestResult('Pricing', '2.2. Đơn >= 150k tự động Miễn phí giao hàng (0₫)', t2.shippingFee === 0 && t2.isFreeShipping === true);
+      } catch(e) { addTestResult('Pricing', '2.2. Freeship', false, e.message); }
+
+      try {
+        const t3 = P.calculateTotals({ items: items, deliveryType: 'EXPRESS' });
+        addTestResult('Pricing', '2.3. Giao hỏa tốc cộng phụ phí 15.000₫ (Tổng ship 35.000₫)', t3.shippingFee === 35000);
+      } catch(e) { addTestResult('Pricing', '2.3. Express', false, e.message); }
+
+      try {
+        const t4 = P.calculateTotals({ items: [{ id: '4', price: 200000, quantity: 1 }], voucherCode: 'KFCGIOL' });
+        addTestResult('Pricing', '2.4. Voucher KFCGIOL giảm 20% chạm trần tối đa 40.000₫', t4.discountAmount === 40000 && t4.grandTotal === 160000);
+      } catch(e) { addTestResult('Pricing', '2.4. Voucher 20%', false, e.message); }
+
+      try {
+        const t5 = P.calculateTotals({ items: items, voucherCode: 'KFCGIOL' });
+        addTestResult('Pricing', '2.5. Từ chối KFCGIOL khi đơn chưa đủ 150k', t5.voucher.applied === false);
+      } catch(e) { addTestResult('Pricing', '2.5. Từ chối voucher', false, e.message); }
+
+      try {
+        const t6 = P.calculateTotals({ items: items, voucherCode: 'FREESHIP' });
+        addTestResult('Pricing', '2.6. Voucher FREESHIP giảm 100% phí vận chuyển', t6.shippingFee === 0 && t6.grandTotal === 124000);
+      } catch(e) { addTestResult('Pricing', '2.6. Voucher freeship', false, e.message); }
+
+      try {
+        const t7 = P.calculateTotals({ items: items, voucherCode: 'KHONGTONTAI' });
+        addTestResult('Pricing', '2.7. Mã voucher lạ không làm gián đoạn tính tiền', t7.grandTotal === 144000 && t7.discountAmount === 0);
+      } catch(e) { addTestResult('Pricing', '2.7. Mã lạ', false, e.message); }
+
+      // Group 3: Gateways
+      const sampleReq = {
+        cartItems: [{ id: '1', price: 89000, quantity: 2 }], // 178k
+        customerInfo: { name: 'Trần Văn A', phone: '0901234567', address: '123 Le Loi, Q1' }
+      };
+
+      try {
+        const g1 = P.processPayment({ ...sampleReq, paymentMethod: 'COD' });
+        addTestResult('Gateways', '3.1. Cổng Tiền mặt COD: Sinh trạng thái PENDING_CASH', g1.success === true && g1.receipt.status === 'PENDING_CASH');
+      } catch(e) { addTestResult('Gateways', '3.1. COD', false, e.message); }
+
+      try {
+        const g2 = P.processPayment({ ...sampleReq, paymentMethod: 'MOMO' });
+        addTestResult('Gateways', '3.2. Cổng MoMo: Sinh mã MoMo-QR và Deep Link hợp lệ', g2.success === true && Boolean(g2.receipt.payment.qrCodePayload));
+      } catch(e) { addTestResult('Gateways', '3.2. MoMo', false, e.message); }
+
+      try {
+        const g3 = P.processPayment({ ...sampleReq, paymentMethod: 'VNPAY' });
+        addTestResult('Gateways', '3.3. Cổng VNPAY: Sinh chuỗi VietQR VNPAY chuẩn', g3.success === true && g3.receipt.payment.qrCodePayload.startsWith('000201'));
+      } catch(e) { addTestResult('Gateways', '3.3. VNPAY', false, e.message); }
+
+      try {
+        const g4 = P.processPayment({
+          ...sampleReq,
+          paymentMethod: 'CARD',
+          cardDetails: { cardNumber: '4111111111111111', cardHolder: 'TRAN VAN A', expiry: '12/28', cvv: '123' }
+        });
+        addTestResult('Gateways', '3.4. Thẻ Quốc tế Visa: Xác thực 3D-Secure & Che mờ số thẻ', g4.success === true && g4.receipt.payment.details.maskedCardNumber.includes('**** 1111'));
+      } catch(e) { addTestResult('Gateways', '3.4. Thẻ quốc tế', false, e.message); }
+
+      try {
+        const g5 = P.processPayment({
+          ...sampleReq,
+          paymentMethod: 'CARD',
+          cardDetails: { cardNumber: '123', cardHolder: '', expiry: '01/20', cvv: 'x' }
+        });
+        addTestResult('Gateways', '3.5. Từ chối thẻ giả hoặc sai thông tin bảo mật', g5.success === false);
+      } catch(e) { addTestResult('Gateways', '3.5. Từ chối thẻ', false, e.message); }
+
+      // Group 4: Edge Cases
+      try {
+        const e1 = P.processPayment({ cartItems: [] });
+        addTestResult('Edge Cases', '4.1. Chặn thanh toán khi Giỏ hàng rỗng', e1.success === false && e1.errorCode === 'EMPTY_CART');
+      } catch(e) { addTestResult('Edge Cases', '4.1. Giỏ rỗng', false, e.message); }
+
+      try {
+        const e2 = P.processPayment({ cartItems: [{ id: '1', price: 50000, quantity: 1 }], customerInfo: {} });
+        addTestResult('Edge Cases', '4.2. Báo lỗi chi tiết khi thiếu thông tin khách hàng', e2.success === false && e2.errorCode === 'INVALID_CUSTOMER_INFO');
+      } catch(e) { addTestResult('Edge Cases', '4.2. Thiếu thông tin', false, e.message); }
+
+      try {
+        const e3 = P.processPayment({ ...sampleReq, paymentMethod: 'BITCOIN' });
+        addTestResult('Edge Cases', '4.3. Báo lỗi khi chọn cổng thanh toán không hỗ trợ', e3.success === false && e3.errorCode === 'UNSUPPORTED_PAYMENT_METHOD');
+      } catch(e) { addTestResult('Edge Cases', '4.3. Cổng không hỗ trợ', false, e.message); }
+
+      try {
+        const e4 = P.processPayment({ ...sampleReq, paymentMethod: 'COD' });
+        const r = e4.receipt;
+        addTestResult('Edge Cases', '4.4. Tính toàn vẹn của Hóa đơn điện tử (Order ID, Timestamp, Tiền VND)', Boolean(r.orderId && r.createdAt && r.totals.formatted.grandTotal));
+      } catch(e) { addTestResult('Edge Cases', '4.4. Hóa đơn', false, e.message); }
+    }
+
+    // Interactive simulator methods
+    const sampleSimItems = [
+      { id: '1', name: 'Combo Gà Rán Giòn', price: 89000, quantity: 2 },
+      { id: '5', name: 'Khoai Tây Chiên Lớn', price: 35000, quantity: 1 }
+    ]; // Subtotal: 213.000₫
+
+    function runSimulationCalculation() {
+      const voucher = document.getElementById('sim-voucher').value;
+      const delivery = document.getElementById('sim-delivery').value;
+      const totals = window.KFCPaymentModule.calculateTotals({
+        items: sampleSimItems,
+        voucherCode: voucher,
+        deliveryType: delivery
+      });
+
+      const box = document.getElementById('sim-calc-breakdown');
+      box.innerHTML = `
+        <div class="flex justify-between"><span>Tạm tính (3 món):</span><span class="font-bold">${totals.formatted.subtotal}</span></div>
+        <div class="flex justify-between text-emerald-700"><span>Giảm giá Voucher:</span><span class="font-bold">${totals.formatted.discountAmount}</span></div>
+        <div class="flex justify-between"><span>Phí giao hàng:</span><span class="font-bold">${totals.formatted.shippingFee}</span></div>
+        <div class="flex justify-between text-sm font-black pt-2 border-t text-red-600"><span>Tổng thanh toán:</span><span>${totals.formatted.grandTotal}</span></div>
+      `;
+    }
+
+    function executeSimulatedCheckout() {
+      const name = document.getElementById('sim-name').value;
+      const phone = document.getElementById('sim-phone').value;
+      const address = document.getElementById('sim-address').value;
+      const voucher = document.getElementById('sim-voucher').value;
+      const delivery = document.getElementById('sim-delivery').value;
+      const method = document.getElementById('sim-method').value;
+
+      const result = window.KFCPaymentModule.processPayment({
+        cartItems: sampleSimItems,
+        customerInfo: { name: name, phone: phone, address: address },
+        voucherCode: voucher,
+        deliveryType: delivery,
+        paymentMethod: method,
+        cardDetails: { cardNumber: '4111111111111111', cardHolder: name.toUpperCase(), expiry: '12/28', cvv: '123' }
+      });
+
+      const box = document.getElementById('sim-receipt-box');
+      box.textContent = JSON.stringify(result, null, 2);
+    }
+
+    window.onload = function() {
+      runBrowserTests();
+      runSimulationCalculation();
+    };
+  </script>
+</body>
+</html>

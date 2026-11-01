@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGradP" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f0f7ff"/>
+      <stop offset="100%" stop-color="#e1effe"/>
+    </linearGradient>
+    <linearGradient id="cupGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#004b93"/>
+      <stop offset="50%" stop-color="#0066cc"/>
+      <stop offset="100%" stop-color="#004080"/>
+    </linearGradient>
+    <linearGradient id="lidGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="50%" stop-color="#e5e5e5"/>
+      <stop offset="100%" stop-color="#cccccc"/>
+    </linearGradient>
+    <filter id="shadowP" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="12" stdDeviation="10" flood-color="#000000" flood-opacity="0.15"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="400" height="300" fill="url(#bgGradP)"/>
+  
+  <!-- Cool blue circle background -->
+  <circle cx="200" cy="150" r="110" fill="#0066cc" opacity="0.08"/>
+
+  <!-- Shadow below cup -->
+  <ellipse cx="200" cy="260" rx="65" ry="14" fill="#000000" opacity="0.15"/>
+
+  <!-- Straw -->
+  <path d="M 205 35 L 245 10 L 255 20 L 215 50 Z" fill="#f40022"/>
+  <rect x="202" y="38" width="8" height="60" fill="#f40022" rx="3"/>
+
+  <!-- Cup Group -->
+  <g filter="url(#shadowP)">
+    <!-- Cup body -->
+    <path d="M 145 95 L 160 250 C 161 254 165 256 170 256 L 230 256 C 235 256 239 254 240 250 L 255 95 Z" fill="url(#cupGrad)"/>
+
+    <!-- Cup Lid -->
+    <path d="M 140 95 L 140 85 C 140 81 143 78 147 78 L 253 78 C 257 78 260 81 260 85 L 260 95 Z" fill="url(#lidGrad)"/>
+    <ellipse cx="200" cy="78" rx="55" ry="8" fill="#ffffff" stroke="#dddddd" stroke-width="1"/>
+
+    <!-- Pepsi Globe Symbol on Cup -->
+    <g transform="translate(200, 175) scale(0.65)">
+      <circle cx="0" cy="0" r="45" fill="#ffffff"/>
+      <!-- Red top wave -->
+      <path d="M -45 0 A 45 45 0 0 1 45 0 C 20 -15 10 15 -45 0 Z" fill="#d9001f"/>
+      <path d="M -45 0 A 45 45 0 0 1 45 -5 C 25 15 -10 -25 -45 0 Z" fill="#d9001f"/>
+      <!-- Blue bottom wave -->
+      <path d="M -45 0 A 45 45 0 0 0 45 0 C 20 15 -10 -25 -45 0 Z" fill="#004b93"/>
+      <!-- White wave band -->
+      <path d="M -45 0 C -10 -25 25 15 45 -5 C 45 0 45 0 45 0 C 20 -15 10 15 -45 0 Z" fill="#ffffff"/>
+    </g>
+
+    <!-- PEPSI text -->
+    <text x="200" y="222" font-family="'Oswald', Impact, sans-serif" font-size="18" font-weight="900" fill="#ffffff" letter-spacing="2" text-anchor="middle">PEPSI</text>
+
+    <!-- Ice cubes & bubbles -->
+    <circle cx="165" cy="115" r="4" fill="#ffffff" opacity="0.6"/>
+    <circle cx="230" cy="130" r="3" fill="#ffffff" opacity="0.6"/>
+    <circle cx="170" cy="145" r="5" fill="#ffffff" opacity="0.4"/>
+    <circle cx="235" cy="160" r="3.5" fill="#ffffff" opacity="0.5"/>
+    <circle cx="162" cy="190" r="2.5" fill="#ffffff" opacity="0.4"/>
+  </g>
+
+  <!-- Ice splash accents outside -->
+  <rect x="110" y="110" width="14" height="14" rx="3" fill="#ffffff" opacity="0.8" transform="rotate(15, 110, 110)"/>
+  <rect x="275" y="130" width="16" height="16" rx="3" fill="#ffffff" opacity="0.8" transform="rotate(-20, 275, 130)"/>
+  <circle cx="120" cy="160" r="3" fill="#0066cc" opacity="0.5"/>
+  <circle cx="280" cy="100" r="4" fill="#0066cc" opacity="0.5"/>
+
+  <!-- Cold Frost Badge -->
+  <rect x="250" y="25" width="125" height="34" rx="17" fill="#0066cc"/>
+  <text x="312" y="47" font-family="'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="bold" fill="#ffffff" text-anchor="middle">MÁT LẠNH</text>
+</svg>

@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="100%" height="100%">
+  <defs>
+    <linearGradient id="burgerBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fff8f0"/>
+      <stop offset="100%" stop-color="#feede0"/>
+    </linearGradient>
+    <linearGradient id="bunGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#f5a623"/>
+      <stop offset="60%" stop-color="#d97706"/>
+      <stop offset="100%" stop-color="#b45309"/>
+    </linearGradient>
+    <linearGradient id="pattyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#d97706"/>
+      <stop offset="50%" stop-color="#b45309"/>
+      <stop offset="100%" stop-color="#78350f"/>
+    </linearGradient>
+    <filter id="burgerShadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="12" stdDeviation="10" flood-color="#000000" flood-opacity="0.15"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="400" height="300" fill="url(#burgerBg)"/>
+  <circle cx="200" cy="150" r="110" fill="#f59e0b" opacity="0.1"/>
+
+  <!-- Shadow below burger -->
+  <ellipse cx="200" cy="255" rx="110" ry="20" fill="#000000" opacity="0.16"/>
+
+  <g filter="url(#burgerShadow)">
+    <!-- Bottom Bun -->
+    <path d="M 110 220 C 110 245 290 245 290 220 L 290 210 L 110 210 Z" fill="#d97706"/>
+    <ellipse cx="200" cy="210" rx="90" ry="12" fill="#f59e0b"/>
+
+    <!-- Bottom Sauce & Mayo -->
+    <path d="M 120 210 Q 150 216 180 210 Q 210 216 240 210 Q 265 215 280 210" stroke="#fef3c7" stroke-width="6" stroke-linecap="round"/>
+
+    <!-- Crispy Patty -->
+    <path d="M 95 190 C 105 180 135 182 155 178 C 175 182 225 176 250 180 C 275 178 305 182 305 195 C 305 210 270 212 250 210 C 220 213 180 211 150 213 C 120 211 95 208 95 190 Z" fill="url(#pattyGrad)"/>
+    <!-- Crispy Texture on Patty -->
+    <circle cx="130" cy="192" r="3" fill="#fef3c7" opacity="0.6"/>
+    <circle cx="170" cy="198" r="4" fill="#fef3c7" opacity="0.5"/>
+    <circle cx="220" cy="194" r="3.5" fill="#fef3c7" opacity="0.6"/>
+    <circle cx="270" cy="196" r="3" fill="#fef3c7" opacity="0.5"/>
+
+    <!-- Melted Cheese -->
+    <path d="M 105 180 L 160 180 L 175 205 L 195 180 L 260 180 L 275 200 L 295 180" fill="#fbbf24"/>
+
+    <!-- Tomato Slices -->
+    <rect x="115" y="166" width="75" height="15" rx="5" fill="#ef4444"/>
+    <rect x="205" y="166" width="80" height="15" rx="5" fill="#dc2626"/>
+
+    <!-- Fresh Lettuce (Wavy folds) -->
+    <path d="M 85 165 C 95 150 110 168 125 156 C 140 166 160 152 175 163 C 195 152 215 165 230 155 C 245 166 265 153 280 164 C 295 154 315 160 315 170 C 315 176 290 176 280 172 C 265 175 240 173 220 176 C 190 173 170 176 150 173 C 125 175 105 174 85 165 Z" fill="#22c55e"/>
+    <path d="M 100 162 Q 120 157 140 162" stroke="#86efac" stroke-width="2" fill="none"/>
+    <path d="M 210 162 Q 240 156 270 162" stroke="#86efac" stroke-width="2" fill="none"/>
+
+    <!-- Top Bun (Dome) -->
+    <path d="M 100 152 C 100 80 300 80 300 152 C 300 157 100 157 100 152 Z" fill="url(#bunGrad)"/>
+    <ellipse cx="200" cy="152" rx="100" ry="10" fill="#d97706" opacity="0.3"/>
+
+    <!-- Bun Highlight -->
+    <path d="M 140 105 C 160 92 240 92 260 105 C 235 98 165 98 140 105 Z" fill="#fef3c7" opacity="0.4"/>
+
+    <!-- Sesame Seeds -->
+    <g fill="#fef3c7">
+      <ellipse cx="150" cy="115" rx="3" ry="5" transform="rotate(-20 150 115)"/>
+      <ellipse cx="175" cy="100" rx="3" ry="5" transform="rotate(10 175 100)"/>
+      <ellipse cx="200" cy="95" rx="3" ry="5" transform="rotate(-5 200 95)"/>
+      <ellipse cx="225" cy="102" rx="3" ry="5" transform="rotate(25 225 102)"/>
+      <ellipse cx="250" cy="118" rx="3" ry="5" transform="rotate(-15 250 118)"/>
+      <ellipse cx="135" cy="130" rx="3" ry="5" transform="rotate(30 135 130)"/>
+      <ellipse cx="165" cy="125" rx="3" ry="5" transform="rotate(-10 165 125)"/>
+      <ellipse cx="195" cy="118" rx="3" ry="5" transform="rotate(15 195 118)"/>
+      <ellipse cx="230" cy="125" rx="3" ry="5" transform="rotate(-30 230 125)"/>
+      <ellipse cx="265" cy="132" rx="3" ry="5" transform="rotate(20 265 132)"/>
+    </g>
+  </g>
+</svg>

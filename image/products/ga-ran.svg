@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fff5f5"/>
+      <stop offset="100%" stop-color="#fee2e2"/>
+    </linearGradient>
+    <linearGradient id="chickenGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e67e22"/>
+      <stop offset="50%" stop-color="#d35400"/>
+      <stop offset="100%" stop-color="#ba4a00"/>
+    </linearGradient>
+    <linearGradient id="crispGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f39c12"/>
+      <stop offset="100%" stop-color="#e67e22"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="12" stdDeviation="10" flood-color="#000000" flood-opacity="0.15"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="400" height="300" fill="url(#bgGrad)"/>
+  
+  <!-- Red accent circle -->
+  <circle cx="200" cy="150" r="110" fill="#f40022" opacity="0.08"/>
+
+  <!-- Plate -->
+  <ellipse cx="200" cy="225" rx="140" ry="32" fill="#e0e0e0" opacity="0.6"/>
+  <ellipse cx="200" cy="220" rx="130" ry="28" fill="#ffffff" filter="url(#shadow)"/>
+  <ellipse cx="200" cy="220" rx="115" ry="22" fill="#fafafa" stroke="#eeeeee" stroke-width="2"/>
+
+  <!-- Drumstick 1 (back) -->
+  <g transform="translate(140, 95) rotate(-25) scale(0.85)">
+    <path d="M 60 70 C 90 40 130 50 140 80 C 150 110 130 140 100 140 C 70 140 40 110 60 70 Z" fill="#c0392b" opacity="0.8"/>
+  </g>
+
+  <!-- Drumstick 2 (Main front) -->
+  <g filter="url(#shadow)">
+    <!-- Bone -->
+    <path d="M 90 200 L 125 170" stroke="#f5f5dc" stroke-width="16" stroke-linecap="round"/>
+    <circle cx="85" cy="204" r="9" fill="#e8e4c9"/>
+    <circle cx="95" cy="210" r="8" fill="#e8e4c9"/>
+    <!-- Meat -->
+    <path d="M 120 175 C 90 140 100 80 150 65 C 200 50 250 85 245 135 C 240 180 170 195 120 175 Z" fill="url(#chickenGrad)"/>
+    <!-- Crispy flakes / texture -->
+    <path d="M 140 85 Q 165 75 190 90 Q 165 110 140 85 Z" fill="url(#crispGrad)"/>
+    <path d="M 170 120 Q 210 105 225 130 Q 195 150 170 120 Z" fill="url(#crispGrad)"/>
+    <path d="M 130 140 Q 155 125 170 150 Q 145 165 130 140 Z" fill="url(#crispGrad)"/>
+    <circle cx="160" cy="100" r="4" fill="#f1c40f"/>
+    <circle cx="195" cy="115" r="5" fill="#f1c40f"/>
+    <circle cx="215" cy="140" r="3.5" fill="#f1c40f"/>
+    <circle cx="150" cy="145" r="4" fill="#f1c40f"/>
+    <circle cx="175" cy="165" r="3" fill="#f1c40f"/>
+  </g>
+
+  <!-- Steam lines -->
+  <path d="M 160 50 Q 170 35 160 20" stroke="#f40022" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.4"/>
+  <path d="M 190 55 Q 200 40 190 25" stroke="#f40022" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.4"/>
+  <path d="M 220 52 Q 230 37 220 22" stroke="#f40022" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.4"/>
+
+  <!-- Badge -->
+  <rect x="250" y="25" width="125" height="34" rx="17" fill="#f40022"/>
+  <text x="312" y="47" font-family="'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="bold" fill="#ffffff" text-anchor="middle">GIÒN RỤM</text>
+</svg>
